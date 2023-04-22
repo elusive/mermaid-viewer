@@ -1,0 +1,25 @@
+{
+  "name": "mermaid-viewer",
+  "version": "0.1.0",
+  "description": "Mermaid viewer w/pan & zoom, similar to Github md support.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Gilliland",
+  "license": "MIT",
+  "dependencies": {
+    "@primer/css": "^21.0.1",
+    "@primer/octicons": "^18.3.0",
+    "lodash.debounce": "^4.0.8",
+    "mermaid": "^8.13.10"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.13",
+    "sass": "^1.62.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.1"
+  }
+}

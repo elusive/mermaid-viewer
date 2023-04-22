@@ -1,0 +1,72 @@
+@import 'base';
+
+.mermaid {
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  height: fit-content;
+  overflow:hidden;
+
+  & > svg {
+    margin: 0 auto;
+    transform-origin: center;
+    transition: 100ms ease-in-out;
+  }
+}
+
+.mermaid-viewer-control-panel {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.2em;
+
+  & > button {
+    padding: 5px 7px;
+  }
+
+  & > .zoom-in {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  & > .zoom-out {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  & > .reset {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  & > .up {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  & > .down {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  & > .left {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  & > .right {
+    grid-column: 3;
+    grid-row: 2;
+  }
+}
+
+html[data-color-mode='dark'] {
+  .mermaid-viewer-control-panel {
+    & > button {
+      fill: white;
+    }
+  }
+}
+

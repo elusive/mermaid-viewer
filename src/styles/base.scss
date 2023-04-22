@@ -1,0 +1,230 @@
+//@import "mixins/gradient";
+//@import "@primer/css/base/modes.scss";
+@import "@primer/css/support/index.scss";
+@import "@primer/css/pagination/index.scss";
+@import "@primer/css/buttons/index.scss";
+
+// Dark mode
+// Currently only available on dotcom and behind the `color_modes` feature flag.
+//@include color-mode("dark") {
+//  @include primer-colors-dark;
+//}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+svg, canvas {
+  display: inline-block;
+  border-radius: 3px;
+}
+
+body {
+  font: 12px Helvetica, arial, freesans, clean, sans-serif;
+  overflow: hidden;
+  background: var(--color-bg-canvas);
+}
+
+.center {
+  display: block;
+  margin: 0 auto;
+}
+
+.render-shell {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.is-embedded .render-shell {
+  border: 1px solid var(--color-border-primary);
+  border-bottom: 1px solid var(--color-border-primary);
+  border-radius: 3px;
+}
+
+.render-viewport {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// =render info
+////////////////////////////////////////////////////////////////////////////////
+
+.render-info {
+  position: absolute;
+  z-index: 999;
+  top: 10px;
+  right: 10px;
+  vertical-align: middle;
+
+  .symbol {
+    font-size: 20px;
+    color: var(--color-text-secondary);
+    float: right;
+    cursor: pointer;
+    line-height: 1;
+    text-shadow:
+     -1px -1px 0 var(--color-bg-primary),
+      1px -1px 0 var(--color-bg-primary),
+      -1px 1px 0 var(--color-bg-primary),
+       1px 1px 0 var(--color-bg-primary);
+  }
+
+  .message {
+    z-index: 9999;
+    margin-top: -8px;
+    margin-right: 18px;
+    display: none;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border-radius: 3px;
+    border: 1px solid var(--color-border-primary);
+    padding: 10px;
+
+    a {
+      color: var(--color-text-link);
+      text-decoration: none;
+    }
+  }
+}
+
+.render-attribution {
+  position: relative;
+  display: block;
+  z-index: 9999;
+  float: right;
+}
+
+.render-attribution:hover .symbol { color: var(--color-text-secondary); }
+.render-attribution:hover .message { display: block; }
+.render-health:hover .symbol { color: var(--color-text-secondary); }
+.render-health:hover .message { display: block; }
+
+.render-health {
+  display: none;
+  position: relative;
+  float: right;
+  margin-left: 5px;
+
+  .symbol {
+    font-size: 25px;
+    line-height: 15px;
+  }
+}
+
+.is-viewer-bad.render-health {
+  display: block;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// =render bar
+////////////////////////////////////////////////////////////////////////////////
+.render-bar {
+  z-index: 9999;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  border-top: 1px solid var(--color-border-primary);
+  text-align: center;
+  background-color: var(--color-bg-tertiary);
+}
+
+.render-bar-with-modes {
+  font: 12px "Helvetica Neue", Helvetica, arial, freesans, clean, sans-serif;
+  .render-message {
+    float: right;
+  }
+}
+
+.render-message {
+  display: none;
+  color: var(--color-text-secondary);
+
+  a {
+    font-weight: bold;
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+}
+
+.is-embedded .render-bar {
+  display: block;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.is-embedded .render-bar-with-modes {
+  text-align: left;
+}
+
+.is-embedded .render-message {
+  display: inline-block;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// =render view modes
+////////////////////////////////////////////////////////////////////////////////
+.render-view-modes {
+  background: none;
+  background-repeat: no-repeat;
+  display: inline-block;
+
+  li {
+    background: none;
+    display: inline-block;
+    cursor: pointer;
+    border-right: 1px solid var(--color-border-primary);
+    padding: 0 5px;
+    position: relative;
+    color: var(--color-text-primary);
+  }
+
+  li:first-child {
+    padding-left: 0;
+  }
+
+  li:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  li.active {
+    font-weight: bold;
+  }
+
+  li.active:before {
+    position: absolute;
+    top: -13px;
+    left: 40%;
+    font-size: 10px;
+    content: "▼";
+    color: var(--color-border-primary);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// =render states
+////////////////////////////////////////////////////////////////////////////////
+.is-viewer-good {
+  display: none;
+}
+
+.is-viewer-bad {
+  display: inline-block;
+}
+
+
+// Failed links will have this class attached briefly
+a.failed, a:hover.failed, a:visited.failed {
+  color: var(--color-text-danger);
+}
+
