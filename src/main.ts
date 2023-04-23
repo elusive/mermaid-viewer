@@ -12,15 +12,16 @@ const DiagramContainer: string = '.mermaid-view';
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
 app.innerHTML = `
-  <h1>Hello Mermaid / Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
+<h1>Hello Mermaid / Vite!</h1>
+<a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
+<div class="is-embedded" style="width: 1000px; height: 700px">
   <div class="render-shell js-render-shell">
     <div class="border-wrap mermaid-view">
         <div class="mermaid">
-            <svg id="diagram" />
         </div>
     </div>
   </div>
+</div>
 `;
 
 function init() {

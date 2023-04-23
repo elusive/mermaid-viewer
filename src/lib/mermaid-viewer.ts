@@ -26,7 +26,7 @@ export abstract class MermaidViewer<DiagramInfo> {
 
     let renderer: MermaidRenderer;
     document.addEventListener(RENDER_EVENT, (() => {
-      renderer = this.onLoad(RENDER_EVENT, renderer);
+      renderer = this.onLoad(this.diagram, renderer);
       this.onAfterLoad(renderer);
     }) as EventListener);
 
