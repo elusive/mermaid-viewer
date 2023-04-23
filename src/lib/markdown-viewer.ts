@@ -1,14 +1,15 @@
 import {decodeHTML} from '../render/utils'
 import MermaidRenderer from './mermaid-renderer'
-import {MermaidViewer} from './mermaid-viewer'
-import {DiagramInfo, RENDER_EVENT} from './constants'
+import {MermaidViewer, DiagramInfo, RENDER_EVENT} from './mermaid-viewer'
 
 
-class MermaidMarkdownViewer extends MermaidViewer<T> {
+class MermaidMarkdownViewer extends MermaidViewer<DiagramInfo> {
   initialize() {
     let evt = new Event(RENDER_EVENT);
-    event.initEvent(RENDER_EVENT, true, true);
-    document.dispatchEvent(evt);
+    if(event) {
+        event.initEvent(RENDER_EVENT, true, true);
+        document.dispatchEvent(evt);
+    }
   }
 
   onLoad(info: DiagramInfo, renderer?: MermaidRenderer): MermaidRenderer {

@@ -1,5 +1,4 @@
 import './styles/mermaid.scss'
-import MermaidRender from './src/lib/mermaid-renderer.ts';
 import {onDocumentReady} from './render/utils'
 import {MermaidMarkdownViewer} from './lib/markdown-viewer'
 
@@ -8,8 +7,8 @@ import {MermaidMarkdownViewer} from './lib/markdown-viewer'
 const DiagramDefinition: string = 'graph TD;\n    Customers-->|browse menu|Pizzas;\n    Pizzas-->|add to cart|Cart;\n    Cart-->|review and edit|Cart;\n    Cart-->|checkout|Orders;\n    Orders-->|Payment| Orders;\n    Orders-->|Confirmation|Customers;\n';
 
    // `"data":"graph TD;\n    Customers--&gt;|browse menu|Pizzas;\n    Pizzas--&gt;|add to cart|Cart;\n    Cart--&gt;|review and edit|Cart;\n    Cart--&gt;|checkout|Orders;\n    Orders--&gt;|Payment| Orders;\n    Orders--&gt;|Confirmation|Customers;\n"`;
-const DiagramWidth: int = 1012;
-const DiagramContainer: string = 'mermaid-viewer';
+const DiagramWidth: number = 1012;
+const DiagramContainer: string = '.mermaid-view';
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
 app.innerHTML = `
@@ -25,7 +24,7 @@ app.innerHTML = `
 `;
 
 function init() {
-  const viewer = new MermaidMarkdownViewer({ code: DiagramDefinition, width: DiagramWidth }, '.mermaid-view');
+  const viewer = new MermaidMarkdownViewer({ code: DiagramDefinition, width: DiagramWidth }, DiagramContainer);
   viewer.initialize()
 }
 

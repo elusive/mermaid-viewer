@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Mermaid viewer w/pan & zoom, similar to Github md support.",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +13,7 @@
   "dependencies": {
     "@primer/css": "^21.0.1",
     "@primer/octicons": "^18.3.0",
+    "dompurify": "^3.0.2",
     "lodash.debounce": "^4.0.8",
     "mermaid": "^8.13.10"
   },

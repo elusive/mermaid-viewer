@@ -1,32 +1,37 @@
 import debounce from 'lodash.debounce'
-import Status from '../render/status'
 import {assertHTMLElement, invariant, getGitHubDocsHostname} from '../render/utils'
 import type MermaidRenderer from './mermaid-renderer'
 import octicons from '@primer/octicons'
-import { DiagramInfo, RENDER_EVENT } from './constants';
 
+export type DiagramInfo = {
+    code: string,
+    width?: number
+};
+
+export const RENDER_EVENT = 'RENDER_EVENT';
 
 const DOCS_LINK_PATH =
   '/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams'
 
 export abstract class MermaidViewer<DiagramInfo> {
   el: HTMLElement
+  diagram: DiagramInfo
 
   constructor(info: DiagramInfo, targetEl: string) {
-    const node = document.querySelector(targetEl)
-    invariant(assertHTMLElement(node), `Mermaid render node does not exist.`)
+    const node = document.querySelector(targetEl);
+    invariant(assertHTMLElement(node), `Mermaid render node does not exist.`);
 
-    this.el = node
-    this.diagram = info     
+    this.el = node;
+    this.diagram = info;
 
-    let renderer: MermaidRenderer
-    document.addEventListener(RENDER_EVENT, ((event: Event) => {
-      renderer = this.onLoad(this.diagram, renderer)
-      this.onAfterLoad(renderer)
-    }) as EventListener)
+    let renderer: MermaidRenderer;
+    document.addEventListener(RENDER_EVENT, (() => {
+      renderer = this.onLoad(RENDER_EVENT, renderer);
+      this.onAfterLoad(renderer);
+    }) as EventListener);
 
-    this.#panAndZoom()
-  info}
+    this.#panAndZoom();
+  }
 
   lazyRender = (renderer: MermaidRenderer) =>
     debounce(async () => {
@@ -38,38 +43,31 @@ export abstract class MermaidViewer<DiagramInfo> {
       }
 
       renderer.width = newWidth
-      const newHeight = await renderer.render()
-      this.iframeMessenger.set(STATUS_TYPES.resize, {
-        height: newHeight
-      })
-    }, 200)
+      await renderer.render()
+    }, 200);
 
   protected abstract initialize(): void
   protected abstract onLoad(
-    event: ContainerResizeEvent | MarkdownResponseEvent,
+    event: string,
     renderer?: MermaidRenderer
   ): MermaidRenderer
 
   protected async onAfterLoad(renderer: MermaidRenderer) {
     try {
-      const diagramHeight = await renderer.render()
-
-      this.iframeMessenger.set(STATUS_TYPES.ready, {
-        height: diagramHeight
-      })
+      await renderer.render();
     } catch (error) {
-      this.reportError(error as Error)
+      this.reportError(error as Error);
     }
   }
 
   protected reportError(error: Error) {
-    const url = new URL(DOCS_LINK_PATH, getGitHubDocsHostname())
+    const url = new URL(DOCS_LINK_PATH, getGitHubDocsHostname());
     const message = `
         ${error.message}
     
         For more information, see ${url.toString()}
-      `.trim()
-    console.log(error)
+      `.trim();
+    console.log(message);
   }
 
   #panAndZoom = () => {
