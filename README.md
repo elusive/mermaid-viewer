@@ -15,4 +15,8 @@ The stack for this example is Node, Typescript (vanilla)
 and Vite. This is my first use of Vite and it was super
 easy and I plan to use it again.
 
+## References
+The pan & zoom controls were adapted from the ones that
+appear automatically when you include a mermaid diagram
+in your README.md file in a Github repository. [More Info](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams)
 
